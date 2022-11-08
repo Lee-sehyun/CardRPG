@@ -82,11 +82,17 @@ void Unit::setDefensiveDecrease(int defensiveDecrease){
     this->defensiveDecrease = defensiveDecrease;
 }
 
-
+/*
+공격을 당하면 데미지에 따라 자신의 피가 까임
+*/
 void Unit::attacked(int damage){
     this->setHp(this->hp - damage);
 }
 
+/*
+턴이 지나면 수정되는 것들
+지금은 마나만 있음
+*/
 void Unit::nextTurn(){
     if(this->mp == this->maxMp){
         this->setMp(0);
@@ -96,13 +102,17 @@ void Unit::nextTurn(){
     }
 }
 
+/*
+공격할 데미지를 계산
+기본 데미지에서 스킬이면 스킬 데미지 추가, 크확에 따라 크리티컬 데미지 추가
+*/
 int Unit::attackDamage(int skill){
     int damage = this->getDamages();
     if(skill){
         damage *= ((float)this->skillDamages/100);
     }
     int random = rand() % 100;
-    cout << random << endl;
+    // cout << random << endl;
     if(random < this->getCriticalProbability()){
         damage *= (((float)this->criticalDamages+100)/100);
     }
@@ -110,6 +120,10 @@ int Unit::attackDamage(int skill){
     return damage;
 }
 
+/*
+방어율에 따라 받는 데미지 감소
+(방어율 감소는 어떻게 계산해야하지?)
+*/
 int Unit::defenseDamage(int damage){
     damage *= (100.0-this->defense)/100;
     return damage;

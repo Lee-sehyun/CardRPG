@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include "unit/Hero.h"
 #include "unit/Enemy.h"
 
@@ -61,6 +62,7 @@ int main(){
     Enemy enemy;
 
     while(hero.getHp() > 0){
+        system("clear");
         hero.status();
         cout << "\n라운드 " << round << endl;
         enemy.status();
@@ -76,8 +78,13 @@ int main(){
 
         if(temp == 1){
             int totalDamage = hero.attackDamage(skill);
+            totalDamage =enemy.defenseDamage(totalDamage);
+            enemy.attacked(totalDamage);
             skill = 0;
-            cout << totalDamage << endl;
+            int enemyDamage = enemy.attackDamage(0);
+            enemyDamage = hero.defenseDamage(enemyDamage);
+            hero.attacked(enemyDamage);
+            // cout << totalDamage << endl;
             hero.nextTurn();
             enemy.nextTurn();
         }
@@ -89,6 +96,10 @@ int main(){
             round++;
         }
     }
+
+    system("clear");   
+    cout << "죽었습니다." << endl;
+    cout << "최종 라운드 : " << round << endl;
 
 
     return 0;
