@@ -42,7 +42,6 @@ void Skill::getSkills(){
 
 void Skill::printSkills(){
     for(int i = 0 ; i < skills.size() ; i++){
-        cout << skills[i] << " ";
+        cout << skills[i].skillNumber << " " << skills[i].skillName << " " << skills[i].skillKind << " " << skills[i].skillDescription << endl;
     }
-    cout << endl;
 }
