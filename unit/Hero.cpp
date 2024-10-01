@@ -1,6 +1,6 @@
 #include "Hero.h"
 
-Hero::Hero(string name):Unit(200, 200, 0, 10, 500, 10, 25, 50, 0, 0, 0){
+Hero::Hero(string name):Unit(200, 200, 10, 10, 500, 10, 25, 50, 0, 0, 0){
     this->name = name;
 }
 

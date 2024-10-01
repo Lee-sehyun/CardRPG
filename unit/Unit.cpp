@@ -94,10 +94,7 @@ void Unit::attacked(int damage){
 지금은 마나만 있음
 */
 void Unit::nextTurn(){
-    if(this->mp == this->maxMp){
-        this->setMp(0);
-    }
-    else{
+    if(this->mp != this->maxMp){
         this->setMp(this->mp + 1);
     }
 }
