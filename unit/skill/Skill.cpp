@@ -6,42 +6,45 @@ Skill::Skill(){
 
 void Skill::getSkills(){
     string line, s;
-    ifstream file("unit/skill/skill.txt");
-    if(file.is_open()){
-        while(getline(file, line)){
-            if(isdigit(line[0]) == 0) continue;
-            istringstream ss (line);
-            skill one;
-            for(int i = 0 ; i < 5 ; i++){
-                getline(ss, s, '-');
-                if(i == 0){
-                    one.skillNumber = stoi(s);
-                }
-                else if(i == 1){
-                    one.skillName = s;
-                }
-                else if(i == 2){
-                    one.skillKind = s;
-                }
-                else if(i == 3){
-                    one.skillProbability.push_back(stoi(s.substr(0, s.find(' '))));
-                    one.skillProbability.push_back(stoi(s.substr(s.find(' '))));
-                }
-                else{
-                    one.skillDescription = s;
-                }
+    fstream file;
+    file.open("unit/skill/skill.csv");
+    while(!file.eof()){
+        getline(file, line);
+        if(isdigit(line[0]) == 0) continue;
+        istringstream ss (line);
+        skill one;
+        for(int i = 0 ; i < 7 ; i++){
+            getline(ss, s, ',');
+            if(i == 0){
+                one.skillNumber = stoi(s);
             }
-            skills.push_back(one);
+            else if(i == 1){
+                one.skillName = s;
+            }
+            else if(i == 2){
+                one.skillKind = s;
+            }
+            else if(i == 3){
+                one.skillProbability.push_back(stoi(s));
+            }
+            else if(i == 4){
+                one.skillProbability.push_back(stoi(s));
+            }
+            else if(i == 5){
+                one.skillProperty = s;
+            }
+            else{
+                one.skillDescription = s;
+            }
         }
-        file.close();
+        skills.push_back(one);
+        ss.clear();
     }
-    else{
-        cout << "파일 없음" << endl;
-    }
+    file.close();
 }
 
 void Skill::printSkills(){
     for(int i = 0 ; i < skills.size() ; i++){
-        cout << skills[i].skillNumber << " " << skills[i].skillName << " " << skills[i].skillKind << " " << skills[i].skillDescription << endl;
+        cout << skills[i].skillNumber << ", " << skills[i].skillName << ", " << skills[i].skillKind << ", " << skills[i].skillProperty << "속성, " << skills[i].skillDescription << endl;
     }
 }

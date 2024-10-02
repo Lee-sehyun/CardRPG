@@ -9,20 +9,29 @@ using namespace std;
 
 class Unit{
     protected:
+        int level;
+        int experience;
+        int needExperience;
         int hp;
         int maxHp;
         int mp;
         int maxMp;
-        int skillDamages;
-        int damages;
+        int physicsDamages;
+        int magicDamages;
         int criticalProbability;
         int criticalDamages;
-        int avoidance;
-        int defense;
-        int defensiveDecrease;
+        int speed;
+        int physicsDefense;
+        int magicDefense;
     
     public:
-        Unit(int hp, int maxHp, int mp, int maxMp, int skillDamages, int damages, int criticalProbability, int criticalDamages, int avoidance, int defense, int defensiveDecrease);
+        Unit(int level, int ecperience, int needEcperience, int hp, int maxHp, int mp, int maxMp, int physicsDamages, int magicDamages, int criticalProbability, int criticalDamages, int physicsDefense, int magicDefense, int speed);
+        int getLevel();
+        void setLevel(int level);
+        int getExperience();
+        void setExperience(int experience);
+        int getNeedExperience();
+        void setNeedExperience(int needExperience);
         int getHp();
         void setHp(int hp);
         int getMaxHp();
@@ -31,26 +40,25 @@ class Unit{
         void setMp(int mp);
         int getMaxMp();
         void setMaxMp(int maxMp);
-        int getSkillDamages();
-        void setSkillDamages(int skillDamages);
-        int getDamages();
-        void setDamages(int damages);
+        int getPhysicsDamages();
+        void setPhysicsDamages(int physicsDamages);
+        int getMagicDamages();
+        void setMagicDamages(int magicDamages);
         int getCriticalProbability();
         void setCriticalProbability(int criticalProbability);
         int getCriticalDamages();
         void setCriticalDamages(int criticalDamages);
-        int getAvoidance();
-        void setAvoidance(int avoidance);
-        int getDefense();
-        void setDefense(int defense);
-        int getDefensiveDecrease();
-        void setDefensiveDecrease(int defensiveDecrease);
+        int getSpeed();
+        void setSpeed(int speed);
+        int getPhysicsDefense();
+        void setPhysicsDefense(int physicsDefense);
+        int getMagicDefense();
+        void setMagicDefense(int magicDefense);
 
 
         void attacked(int damage);
         void nextTurn();
         int attackDamage(int skill);
-        int defenseDamage(int damage);
 
 };
 

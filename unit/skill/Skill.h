@@ -14,6 +14,7 @@ struct skill
     int skillNumber;
     string skillName;
     string skillKind;
+    string skillProperty;
     vector<int> skillProbability;
     string skillDescription;
 };

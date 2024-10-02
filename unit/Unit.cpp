@@ -1,20 +1,41 @@
 #include "Unit.h"
 
-Unit::Unit(int hp, int maxHp, int mp, int maxMp, int skillDamages, int damages, int criticalProbability, int criticalDamages, int avoidance, int defense, int defensiveDecrease){
+Unit::Unit(int level, int experience, int needExperience, int hp, int maxHp, int mp, int maxMp, int physicsDamages, int magicDamages, int criticalProbability, int criticalDamages, int physicsDefense, int magicDefense, int speed){
+    this->level = level;
+    this->experience = experience;
+    this->needExperience = needExperience;
     this->hp = hp;
     this->maxHp = maxHp;
     this->mp = mp;
     this->maxMp = maxMp;
-    this->skillDamages = skillDamages;
-    this->damages = damages;
+    this->physicsDamages = physicsDamages;
+    this->magicDamages = magicDamages;
     this->criticalProbability = criticalProbability;
     this->criticalDamages = criticalDamages;
-    this->avoidance = avoidance;
-    this->defense = defense;
-    this->defensiveDecrease = defensiveDecrease;
+    this->physicsDefense = physicsDefense;
+    this->magicDefense = magicDefense;
+    this->speed = speed;
     srand((unsigned int)time(NULL));
 }
 
+int Unit::getLevel(){
+    return this->level;
+}
+void Unit::setLevel(int level){
+    this->level = level;
+}
+int Unit::getExperience(){
+    return this->experience;
+}
+void Unit::setExperience(int experience){
+    this->experience = experience;
+}
+int Unit::getNeedExperience(){
+    return this->needExperience;
+}
+void Unit::setNeedExperience(int needExperience){
+    this->needExperience = needExperience;
+}
 int Unit::getHp(){
     return this->hp;
 }
@@ -39,17 +60,17 @@ int Unit::getMaxMp(){
 void Unit::setMaxMp(int maxMp){
     this->maxMp = maxMp;
 }
-int Unit::getSkillDamages(){
-    return this->skillDamages;
+int Unit::getPhysicsDamages(){
+    return this->physicsDamages;
 }
-void Unit::setSkillDamages(int skillDamages){
-    this->skillDamages = skillDamages;
+void Unit::setPhysicsDamages(int physicsDamages){
+    this->physicsDamages = physicsDamages;
 }
-int Unit::getDamages(){
-    return this->damages;
+int Unit::getMagicDamages(){
+    return this->magicDamages;
 }
-void Unit::setDamages(int damages){
-    this->damages = damages;
+void Unit::setMagicDamages(int magicDamages){
+    this->magicDamages = magicDamages;
 }
 int Unit::getCriticalProbability(){
     return criticalProbability;
@@ -63,23 +84,23 @@ int Unit::getCriticalDamages(){
 void Unit::setCriticalDamages(int criticalDamages){
     this->criticalDamages = criticalDamages;
 }
-int Unit::getAvoidance(){
-    return this->avoidance;
+int Unit::getSpeed(){
+    return this->speed;
 }
-void Unit::setAvoidance(int avoidance){
-    this->avoidance = avoidance;
+void Unit::setSpeed(int speed){
+    this->speed = speed;
 }
-int Unit::getDefense(){
-    return this->defense;
+int Unit::getPhysicsDefense(){
+    return this->physicsDefense;
 }
-void Unit::setDefense(int defense){
-    this->defense = defense;
+void Unit::setPhysicsDefense(int physicsDefense){
+    this->physicsDefense = physicsDefense;
 }
-int Unit::getDefensiveDecrease(){
-    return this->defensiveDecrease;
+int Unit::getMagicDefense(){
+    return this->magicDefense;
 }
-void Unit::setDefensiveDecrease(int defensiveDecrease){
-    this->defensiveDecrease = defensiveDecrease;
+void Unit::setMagicDefense(int magicDefense){
+    this->magicDefense = magicDefense;
 }
 
 /*
@@ -103,25 +124,16 @@ void Unit::nextTurn(){
 공격할 데미지를 계산
 기본 데미지에서 스킬이면 스킬 데미지 추가, 크확에 따라 크리티컬 데미지 추가
 */
-int Unit::attackDamage(int skill){
-    int damage = this->getDamages();
-    if(skill){
-        damage *= ((float)this->skillDamages/100);
-    }
-    int random = rand() % 100;
-    // cout << random << endl;
-    if(random < this->getCriticalProbability()){
-        damage *= (((float)this->criticalDamages+100)/100);
-    }
+// int Unit::attackDamage(int skill){
+//     int damage = this->getDamages();
+//     if(skill){
+//         damage *= ((float)this->skillDamages/100);
+//     }
+//     int random = rand() % 100;
+//     // cout << random << endl;
+//     if(random < this->getCriticalProbability()){
+//         damage *= (((float)this->criticalDamages+100)/100);
+//     }
 
-    return damage;
-}
-
-/*
-방어율에 따라 받는 데미지 감소
-(방어율 감소는 어떻게 계산해야하지?)
-*/
-int Unit::defenseDamage(int damage){
-    damage *= (100.0-this->defense)/100;
-    return damage;
-}
+//     return damage;
+// }

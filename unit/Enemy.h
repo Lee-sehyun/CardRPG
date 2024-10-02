@@ -7,10 +7,18 @@
 using namespace std;
 
 class Enemy : public Unit{
+    private:
+        vector<int> enemyInfo;
+        vector<int> bossInfo;
+        vector<int> hiddenBossInfo;
+
     public:
         Enemy();
         void status();
         void nextRound();
+        void randomEnemy();
+        void randomBoss();
+        void randomHiddenBoss();
 
 };
 

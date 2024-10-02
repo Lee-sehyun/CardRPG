@@ -1,3 +1,6 @@
 *.o
 main
+debug.cpp
+debug
+debug.dSYM
 .vscode

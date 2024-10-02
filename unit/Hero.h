@@ -12,12 +12,13 @@ class Hero : public Unit{
         string name;
     
     public:
-        Hero(string name);
+        Hero(string name, vector<int> character);
         string getName();
         void setName(int name);
 
 
         void status();
+        void levelUp();
 
 };
 
