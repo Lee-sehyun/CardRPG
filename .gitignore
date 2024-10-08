@@ -4,5 +4,5 @@ debug.cpp
 debug
 debug.dSYM
 .vscode
-.DS_Store
+*.DS_Store
 resources
