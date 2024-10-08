@@ -1,59 +1,23 @@
 #include <iostream>
 #include <stdlib.h>
+#include <string>
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "unit/Hero.h"
 #include "unit/Enemy.h"
+#include "unit/Character.h"
 #include "unit/skill/Skill.h"
 
+#include <codecvt>
+#include <locale>
+
 using namespace std;
+using namespace sf;
 
 vector<int> getHeroStatus();
+wstring s2w(string);
 
 int main(){
-
-    /*
-    기본 능력치가 필요함.
-    hp : 200
-    mp (스킬을 쓸 때 필요한 포인트 공격 한번당 1 씩 차오름) : 10
-    스킬 데미지 : 500
-    공격력 : 10
-    공속 (이 공속을 어떻게 재야할까...) : ??? 일단 빼
-    치명타 확률 : 25%
-    치명타 피해량 : 50%
-    회피율 : 0
-    방어력? : 0
-    방어력 감소 : 0
-    
-
-    스킬들이 필요함
-
-    스킬을 얻는 건 언제부터?
-    스킬은 뭐뭐가 필요할까?
-
-    상대가 필요함
-    1라운드
-    hp : 100
-    mp : 20
-    스킬 데미지 : 200
-    공격력 : 5
-    방어력 : 0
-    치명타 확률 : 25%
-    치명타 피해량 : 50%
-    회피율 : 0
-    방어력? : 0
-    방어력 감소 : 0
-    2라운드
-    .
-    .
-    .
-    N라운드
-    라운드당 hp 20퍼 증가, 공격력 10퍼 증가, (스킬을 1개 얻음)
-    
-    생각해볼 사항
-    공속을 어떻게 잴 것인지
-    방어력을 어떻게 적용시킬 것인지
-    방어력 감소는 어떻게 적용시킬 것인지
-
-    */
 
     int temp;
     int round = 1, skill = 0;
@@ -61,7 +25,84 @@ int main(){
     cout << "당신의 이름을 입력해주세요. : ";
     cin >> name;
 
-    Hero hero(name, getHeroStatus());
+    // vector<int>heroStatus = {1, 0, 500, 100, 100, 10, 10, 20, 20, 0, 100, 10, 10, 10};
+    Hero hero(name, vector<int>(14));
+
+    RenderWindow window(VideoMode(640, 480), "CARD_RPG");
+    window.setFramerateLimit(60);  //프레임 비율 설정
+
+    Music playMusic;
+    // playMusic.openFromFile("resources/music.ogg");
+
+    Font font;
+    font.loadFromFile("resources/CookieRun Black.ttf");
+
+    Text nameText;
+    nameText.setFont(font);
+    nameText.setString(s2w(hero.getName()));
+    nameText.setCharacterSize(12);
+    nameText.setFillColor(Color::Black);
+    nameText.setPosition(80.f, 330.f);
+
+    Text text1, text2, text3, text4, text5;
+    text1.setFont(font);
+    text1.setString(s2w("LV: " + to_string(hero.getLevel())));
+    text1.setCharacterSize(12);
+    text1.setFillColor(Color::Black);
+    text1.setPosition(40.f, 380.f);
+
+    text2.setFont(font);
+    text2.setString(s2w("체력: " + to_string(hero.getHp()) + "/" + to_string(hero.getMaxHp()) + "    마나: " + to_string(hero.getMp()) + "/" + to_string(hero.getMaxMp())));
+    text2.setCharacterSize(12);
+    text2.setFillColor(Color::Black);
+    text2.setPosition(40.f, 400.f);
+
+    text3.setFont(font);
+    text3.setString(s2w("공격력: " + to_string(hero.getPhysicsDamages()) + "    마력: " + to_string(hero.getMagicDamages())));
+    text3.setCharacterSize(12);
+    text3.setFillColor(Color::Black);
+    text3.setPosition(40.f, 420.f);
+
+    text4.setFont(font);
+    text4.setString(s2w("방어력: " + to_string(hero.getPhysicsDefense()) + "    마방" + to_string(hero.getMagicDefense())));
+    text4.setCharacterSize(12);
+    text4.setFillColor(Color::Black);
+    text4.setPosition(40.f, 440.f);
+
+    text5.setFont(font);
+    text5.setString(s2w("속도: " + to_string(hero.getSpeed())));
+    text5.setCharacterSize(12);
+    text5.setFillColor(Color::Black);
+    text5.setPosition(40.f, 460.f);
+
+    // playMusic.play();
+
+    while (window.isOpen())
+    {
+        Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == Event::Closed)
+                window.close();
+        }
+
+
+
+
+        window.clear(Color::White);
+        window.draw(nameText);
+        window.draw(text1);
+        window.draw(text2);
+        window.draw(text3);
+        window.draw(text4);
+        window.draw(text5);
+        window.display();
+    }
+
+
+
+
+
     // Enemy enemy;
 
     // while(hero.getHp() > 0){
@@ -108,6 +149,10 @@ int main(){
     return 0;
 }
 
-vector<int> getHeroStatus(){
-    
+wstring s2w(string s){
+    return wstring_convert<codecvt_utf8<wchar_t> >().from_bytes(s);
 }
+
+// vector<int> getHeroStatus(){
+    
+// }

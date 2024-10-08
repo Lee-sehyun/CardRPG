@@ -1,6 +1,6 @@
 #include "Hero.h"
 
-Hero::Hero(string name, vector<int> charater):Unit(charater[0], charater[0], charater[0], charater[0], charater[0], charater[0], charater[0], charater[0], charater[0], charater[0], charater[0], charater[0], charater[0], charater[0]){
+Hero::Hero(string name, vector<int> charater):Unit(charater[0], charater[1], charater[2], charater[3], charater[4], charater[5], charater[6], charater[7], charater[8], charater[9], charater[10], charater[11], charater[12], charater[13]){
     this->name = name;
 }
 

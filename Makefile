@@ -15,14 +15,14 @@ Enemy.o : unit/Enemy.h unit/Enemy.cpp
 Character.o : unit/Character.h unit/Character.cpp
 	g++ -c unit/Character.cpp
 
-# main.o : main.cpp Hero.o Enemy.o
-# 	g++ -c main.cpp
+main.o : main.cpp Hero.o Enemy.o Character.o Skill.o
+	g++ -c main.cpp
 
-# main : main.o Hero.o Enemy.o Unit.o Skill.o
-# 	g++ Hero.o Enemy.o Unit.o Skill.o main.o -o main
+main : main.o Hero.o Enemy.o Unit.o Character.o Skill.o
+	g++ Hero.o Enemy.o Unit.o Character.o Skill.o main.o -I$(SFML_PATH)/include -o main -L$(SFML_PATH)/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lsfml-network
 
-debug.o : debug.cpp Hero.o Enemy.o Character.o Skill.o
-	g++ -c debug.cpp -I$(SFML_PATH)/include -o bin/app -L$(SFML_PATH)/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lsfml-network
+# debug.o : debug.cpp Hero.o Enemy.o Character.o Skill.o
+# 	g++ -c debug.cpp
 
-main : debug.o Hero.o Enemy.o Unit.o Character.o Skill.o
-	g++ Hero.o Enemy.o Unit.o Character.o Skill.o debug.o -o main
+# main : debug.o Hero.o Enemy.o Unit.o Character.o Skill.o
+# 	g++ Hero.o Enemy.o Unit.o Character.o Skill.o debug.o -I$(SFML_PATH)/include -o main -L$(SFML_PATH)/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lsfml-network
